@@ -3,6 +3,7 @@ import * as $ from './utils/dom';
 import IconCallOut from './assets/call-out.svg';
 import IconCitation from './assets/citation.svg';
 import IconDetails from './assets/details.svg';
+import IconText from './assets/text.svg';
 
 /**
  * Available predefined variants
@@ -25,6 +26,12 @@ export const TextVariant = {
    * Should be indicated by a font about two sizes smaller than standard text.
    */
   Details: 'details',
+
+  TextXS: 'text-xs',
+  TextSM: 'text-sm',
+  TextBase: 'text-base',
+  TextLG: 'text-lg',
+  Text2XL: 'text-2xl',
 };
 
 /**
@@ -72,6 +79,31 @@ export default class TextVariantTune {
         name: TextVariant.Details,
         icon: IconDetails,
         title: this.api.i18n.t('Details'),
+      },
+      {
+        name: TextVariant.TextXS,
+        icon: IconText,
+        title: this.api.i18n.t('XS'),
+      },
+      {
+        name: TextVariant.TextSM,
+        icon: IconText,
+        title: this.api.i18n.t('SM'),
+      },
+      {
+        name: TextVariant.TextBase,
+        icon: IconText,
+        title: this.api.i18n.t('Base'),
+      },
+      {
+        name: TextVariant.TextLG,
+        icon: IconText,
+        title: this.api.i18n.t('LG'),
+      },
+      {
+        name: TextVariant.Text2XL,
+        icon: IconText,
+        title: this.api.i18n.t('2XL'),
       },
     ];
 
