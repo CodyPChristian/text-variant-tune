@@ -1,5 +1,5 @@
 {
-  "name": "@editorjs/text-variant-tune",
+  "name": "text-variant-tune",
   "version": "1.0.3",
   "main": "dist/text-variant-tune.js",
   "repository": "https://github.com/codypchristian/text-variant-tune",
