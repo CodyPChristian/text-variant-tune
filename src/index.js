@@ -3,7 +3,11 @@ import * as $ from './utils/dom';
 import IconCallOut from './assets/call-out.svg';
 import IconCitation from './assets/citation.svg';
 import IconDetails from './assets/details.svg';
-import IconText from './assets/text.svg';
+import IconTextXS from './assets/text-xs.svg';
+import IconTextSM from './assets/text-sm.svg';
+import IconTextBase from './assets/text-base.svg';
+import IconTextLG from './assets/text-lg.svg';
+import IconText2XL from './assets/text-2xl.svg';
 
 /**
  * Available predefined variants
@@ -68,7 +72,7 @@ export default class TextVariantTune {
       {
         name: TextVariant.CallOut,
         icon: IconCallOut,
-        title: this.api.i18n.t('Call-out'),
+        title: this.api.i18n.t('Call Out'),
       },
       {
         name: TextVariant.Citation,
@@ -82,27 +86,27 @@ export default class TextVariantTune {
       },
       {
         name: TextVariant.TextXS,
-        icon: IconText,
+        icon: IconTextXS,
         title: this.api.i18n.t('XS'),
       },
       {
         name: TextVariant.TextSM,
-        icon: IconText,
+        icon: IconTextSM,
         title: this.api.i18n.t('SM'),
       },
       {
         name: TextVariant.TextBase,
-        icon: IconText,
+        icon: IconTextBase,
         title: this.api.i18n.t('Base'),
       },
       {
         name: TextVariant.TextLG,
-        icon: IconText,
+        icon: IconTextLG,
         title: this.api.i18n.t('LG'),
       },
       {
         name: TextVariant.Text2XL,
-        icon: IconText,
+        icon: IconText2XL,
         title: this.api.i18n.t('2XL'),
       },
     ];
@@ -148,6 +152,12 @@ export default class TextVariantTune {
         hidingDelay: 500,
       });
 
+      if (this.data === name) {
+        toggler.classList.add(this.api.styles.settingsButtonActive);
+      } else {
+        toggler.classList.remove(this.api.styles.settingsButtonActive);
+      }
+
       tuneWrapper.appendChild(toggler);
     });
 
@@ -174,8 +184,12 @@ export default class TextVariantTune {
 
     tune.classList.toggle(this.api.styles.settingsButtonActive, !isEnabled);
 
-    this.variant = !isEnabled ? tune.dataset.name : '';
-
+    if (!isEnabled) {
+      this.variant(tune.dataset.name);
+    } else {
+      this.variant('');
+    }
+  
     this.block.dispatchChange();
   }
 
@@ -188,7 +202,7 @@ export default class TextVariantTune {
   wrap(blockContent) {
     this.wrapper = $.make('div');
 
-    this.variant = this.data;
+    this.variant(this.data);
 
     this.wrapper.appendChild(blockContent);
 
@@ -200,11 +214,16 @@ export default class TextVariantTune {
    *
    * @param {string} name - variant to save
    */
-  set variant(name) {
+  variant(name) {
     this.data = name;
 
     this.variants.forEach((variant) => {
       this.wrapper.classList.toggle(`cdx-text-variant--${variant.name}`, variant.name === this.data);
+
+      let toggler = document.querySelector(`.${TextVariantTune.CSS.toggler}[data-name="${variant.name}"]`);
+      if (toggler) {
+        toggler.classList.toggle(this.api.styles.settingsButtonActive, variant.name === this.data);
+      }
     });
   }
 
